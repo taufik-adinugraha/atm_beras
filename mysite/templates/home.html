@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 class="card-title">Administrasi Pendaftaran ATM Beras</h2>
+  <p>
+    <a href="{% url 'register' %}" class="btn btn-primary">Pendaftaran Baru</a>
+  </p>
+  <p>
+    <a href="{% url 'list' %}" class="btn btn-success">Data Penerima</a>
+  </p>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  {% block content_header %}
+    <p>
+      <a href="{% url 'home' %}" class="btn btn-warning">Kembali</a>
+    </p>
+    <p>
+      <a href="{% url 'register' %}" class="btn btn-primary">Pendaftaran Baru</a>
+    </p>
+    <h2>Daftar Nama Penerima</h2>
+    <p>Jumlah Total: {{ daftar|length }} orang</p>
+  {% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Foto</th>
+        <th>Hapus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dat in daftar %}
+        <tr>
+          <td>{{ dat.nama }}</td>
+          <td>{{ dat.alamat }}</td>
+          <td>
+            {% if dat.foto %}
+              <img src="{{ dat.foto.url }}" alt="{{ dat.nama }}" style="width:50px;">
+            {% else %}
+              <span class="text-muted">Tidak Ada Foto</span>
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" action="{% url 'delete' dat.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
